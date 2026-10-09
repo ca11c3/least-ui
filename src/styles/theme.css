@@ -1,0 +1,464 @@
+/* leastui theme — import after `@import "tailwindcss";` */
+@import "tw-animate-css";
+
+/* Let Tailwind pick up the utility classes used inside the compiled components. */
+@source "./";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: rgb(250 250 250);
+  --foreground: rgb(9 9 11);
+  --card: rgb(255 255 255);
+  --card-foreground: rgb(9 9 11);
+  --popover: rgb(255 255 255);
+  --popover-foreground: rgb(9 9 11);
+  --primary: rgb(79 70 229);
+  --primary-foreground: rgb(255 255 255);
+  --secondary: rgb(192 38 211);
+  --secondary-foreground: rgb(255 255 255);
+  --muted: rgb(244 244 245);
+  --muted-foreground: rgb(113 113 122);
+  --accent: rgb(99 102 241);
+  --accent-foreground: rgb(255 255 255);
+  --destructive: rgb(220 38 38);
+  --border: rgb(228 228 231);
+  --input: rgb(212 212 216);
+  --ring: rgb(129 140 248);
+
+  --chart-1: rgb(99 102 241);
+  --chart-2: rgb(217 70 239);
+  --chart-3: rgb(234 88 12);
+  --chart-4: rgb(15 118 110);
+  --chart-5: rgb(217 119 6);
+  --radius: 0.625rem;
+
+  --sidebar: rgb(255 255 255);
+  --sidebar-foreground: rgb(39 39 42);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: rgb(255 255 255);
+  --sidebar-accent: rgb(238 242 255);
+  --sidebar-accent-foreground: rgb(55 48 163);
+  --sidebar-border: rgb(244 244 245);
+  --sidebar-ring: var(--ring);
+  --sidebar-width: 16rem;
+
+  /* Shadow ink. Split out so dark mode can swap both the colour and its
+     weight: a dark UI has almost no luminance left to darken, so the same
+     opacity that reads as a shadow on white is invisible on near-black. */
+  --shadow-color: rgb(73 68 63);
+  --shadow-contact: color-mix(in srgb, var(--shadow-color) 8%, transparent);
+  --shadow-cast: color-mix(in srgb, var(--shadow-color) 18%, transparent);
+
+  --shadow-2xs: 1px 1px 3px 0px rgb(73 68 63 / 0.05);
+  --shadow-xs: 1px 1px 3px 0px rgb(73 68 63 / 0.05);
+  --shadow-sm:
+    1px 1px 3px 0px rgb(73 68 63 / 0.1), 1px 1px 2px -1px rgb(73 68 63 / 0.1);
+  --shadow:
+    1px 1px 3px 0px rgb(73 68 63 / 0.1), 1px 1px 2px -1px rgb(73 68 63 / 0.1);
+  --shadow-md:
+    1px 1px 3px 0px rgb(73 68 63 / 0.1), 1px 2px 4px -1px rgb(73 68 63 / 0.1);
+  --shadow-lg:
+    1px 1px 3px 0px rgb(73 68 63 / 0.1), 1px 4px 6px -1px rgb(73 68 63 / 0.1);
+  --shadow-xl:
+    1px 1px 3px 0px rgb(73 68 63 / 0.1), 1px 8px 10px -1px rgb(73 68 63 / 0.1);
+  --shadow-2xl: 1px 1px 3px 0px rgb(73 68 63 / 0.25);
+
+  /* Status colours */
+  --success: rgb(40, 193, 55);
+  --success-foreground: rgb(245, 255, 248);
+  --warning: rgb(218, 148, 28);
+  --warning-foreground: rgb(255 251 235);
+  --info: rgb(7, 113, 242);
+  --info-foreground: rgb(240 249 255);
+  --pending: rgb(124, 124, 126);
+  --pending-foreground: rgb(255 255 255);
+
+  /* Data-viz palette: a fixed categorical order validated for colour-vision
+     deficiency on the card surface (light #fff, dark #18181b). Assign slots in
+     order; never cycle past 8. Chart chrome stays one step off the surface. */
+  --viz-1: #2a78d6;
+  --viz-2: #eb6834;
+  --viz-3: #1baf7a;
+  --viz-4: #eda100;
+  --viz-5: #e87ba4;
+  --viz-6: #008300;
+  --viz-7: #4a3aa7;
+  --viz-8: #e34948;
+  --viz-muted: #c4c4cc;
+  --viz-grid: rgb(236 236 238);
+  --viz-axis: rgb(212 212 216);
+  /* Delta text: readable as text, unlike the status fills. */
+  --viz-good-text: #006300;
+  --viz-bad-text: #b42318;
+}
+
+.dark {
+  --background: rgb(9 9 11);
+  --foreground: rgb(244 244 245);
+  --card: rgb(24 24 27);
+  --card-foreground: rgb(244 244 245);
+  --popover: rgb(39 39 42);
+  --popover-foreground: rgb(244 244 245);
+  --primary: rgb(99 102 241);
+  --primary-foreground: rgb(255 255 255);
+  --secondary: rgb(217 70 239);
+  --secondary-foreground: rgb(255 255 255);
+  --muted: rgb(39 39 42);
+  --muted-foreground: rgb(161 161 170);
+  --accent: rgb(129 140 248);
+  --accent-foreground: rgb(9 9 11);
+  --destructive: rgb(248 113 113);
+  --border: rgb(39 39 42);
+  --input: rgb(63 63 70);
+  --ring: rgb(129 140 248);
+
+  --chart-1: rgb(129 140 248);
+  --chart-2: rgb(232 121 249);
+  --chart-3: rgb(249 115 22);
+  --chart-4: rgb(45 212 191);
+  --chart-5: rgb(251 191 36);
+
+  --sidebar: rgb(12 12 14);
+  --sidebar-foreground: rgb(212 212 216);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: rgb(255 255 255);
+  --sidebar-accent: rgb(30 27 75);
+  --sidebar-accent-foreground: rgb(199 210 254);
+  --sidebar-border: rgb(39 39 42);
+  --sidebar-ring: var(--ring);
+
+  /* Status colours are lifted for dark: they are mostly used as text on a
+     10% tint, which needs a brighter base than on white. */
+  --success: rgb(63 201 90);
+  --success-foreground: rgb(240 253 244);
+  --warning: rgb(237, 176, 69);
+  --warning-foreground: rgb(255 251 235);
+  --info: rgb(53, 117, 247);
+  --info-foreground: rgb(240 249 255);
+  --pending: rgb(173, 169, 169);
+  --pending-foreground: rgb(245 243 255);
+
+  --viz-1: #3987e5;
+  --viz-2: #d95926;
+  --viz-3: #199e70;
+  --viz-4: #c98500;
+  --viz-5: #d55181;
+  --viz-6: #008300;
+  --viz-7: #9085e9;
+  --viz-8: #e66767;
+  --viz-muted: #52525b;
+  --viz-grid: rgb(39 39 42);
+  --viz-axis: rgb(63 63 70);
+  --viz-good-text: #3fc95a;
+  --viz-bad-text: #f97066;
+
+  --shadow-color: rgb(0 0 0);
+  --shadow-contact: color-mix(in srgb, var(--shadow-color) 40%, transparent);
+  --shadow-cast: color-mix(in srgb, var(--shadow-color) 65%, transparent);
+
+  --shadow-2xs: 0 1px 2px 0px rgb(0 0 0 / 0.4);
+  --shadow-xs: 0 1px 3px 0px rgb(0 0 0 / 0.45);
+  --shadow-sm: 0 1px 3px 0px rgb(0 0 0 / 0.5), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --shadow: 0 2px 6px -1px rgb(0 0 0 / 0.5), 0 1px 3px -1px rgb(0 0 0 / 0.4);
+  --shadow-md:
+    0 4px 10px -2px rgb(0 0 0 / 0.55), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg:
+    0 8px 20px -4px rgb(0 0 0 / 0.6), 0 4px 8px -4px rgb(0 0 0 / 0.45);
+  --shadow-xl:
+    0 16px 32px -8px rgb(0 0 0 / 0.65), 0 8px 16px -8px rgb(0 0 0 / 0.5);
+  --shadow-2xl: 0 24px 48px -12px rgb(0 0 0 / 0.75);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-pending: var(--pending);
+  --color-pending-foreground: var(--pending-foreground);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+
+  /* Keyframes */
+  @keyframes ripple {
+    from {
+      width: 1px;
+      height: 1px;
+      opacity: 0.5;
+    }
+    to {
+      width: 1000px;
+      height: 1000px;
+      opacity: 0;
+    }
+  }
+
+  @keyframes loading-primary {
+    0% {
+      left: -35%;
+      width: 33%;
+    }
+    60% {
+      left: 100%;
+      width: 33%;
+    }
+    100% {
+      left: 100%;
+      width: 33%;
+    }
+  }
+
+  @keyframes loading-secondary {
+    0% {
+      left: -200%;
+      right: 100%;
+    }
+    60% {
+      left: 107%;
+      right: -8%;
+    }
+    100% {
+      left: 107%;
+      right: -8%;
+    }
+  }
+
+  @keyframes collapsible-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+      opacity: 1;
+    }
+  }
+
+  @keyframes collapsible-up {
+    from {
+      height: var(--radix-collapsible-content-height);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  --animate-ripple: ripple 2000ms ease-out;
+  --animate-collapsible-down: collapsible-down 220ms ease-out;
+  --animate-collapsible-up: collapsible-up 180ms ease-in forwards;
+  --animate-loading-primary: loading-primary 2.1s
+    cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  --animate-loading-secondary: loading-secondary 2.1s
+    cubic-bezier(0.165, 0.84, 0.44, 1) infinite 1.15s;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  [data-slot="table-container"][data-scrolled="true"]
+    > [data-slot="table-grid"]
+    > [data-slot="table-grid-header"] {
+    box-shadow:
+      0 1px 2px -1px var(--shadow-contact),
+      0 10px 24px -8px var(--shadow-cast);
+  }
+
+  [data-slot="table-grid"][data-can-scroll-right="true"]
+    > [data-slot="table-grid-header"]
+    > [data-slot="table-grid-row"]
+    > [data-slot="table-grid-head"][data-action="true"],
+  [data-slot="table-grid"][data-can-scroll-right="true"]
+    > [data-slot="table-grid-body"]
+    > [data-slot="table-grid-row"]
+    > [data-slot="table-grid-cell"][data-action="true"] {
+    box-shadow:
+      -1px 0 2px -1px var(--shadow-contact),
+      -10px 0 24px -8px var(--shadow-cast);
+  }
+}
+
+@layer utilities {
+  .focus-ring {
+    @apply transition-[color,box-shadow] outline-none;
+    @apply focus:border-ring focus:ring-ring/50 focus:ring-[3px];
+    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
+  }
+
+  .focus-within-ring {
+    @apply transition-[color,box-shadow] outline-none;
+    @apply focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px];
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--foreground) 20%, transparent);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--foreground) 30%, transparent);
+}
+* {
+  scrollbar-color: color-mix(in srgb, var(--foreground) 20%, transparent)
+    transparent;
+  scrollbar-width: thin;
+}
+
+@keyframes toast-slide-in {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-slide-out {
+  to {
+    transform: translateY(-60%);
+    opacity: 0;
+  }
+}
+
+.toaster [data-sonner-toast][data-mounted="true"]:not([data-removed="true"]) {
+  animation: toast-slide-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) backwards !important;
+}
+
+.toaster [data-sonner-toast][data-mounted="true"][data-removed="true"] {
+  animation: toast-slide-out 0.2s ease-in forwards !important;
+}
+
+.toaster [data-sonner-toast] {
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    height 0.4s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease !important;
+}
+
+@layer utilities {
+  .toaster [data-sonner-toast][data-front="false"][data-type="success"] {
+    background-color: color-mix(
+      in srgb,
+      var(--success) 50%,
+      var(--background)
+    ) !important;
+    border-color: color-mix(
+      in srgb,
+      var(--success) 50%,
+      var(--background)
+    ) !important;
+  }
+
+  .toaster [data-sonner-toast][data-front="false"][data-type="error"] {
+    background-color: color-mix(
+      in srgb,
+      var(--destructive) 50%,
+      var(--background)
+    ) !important;
+    border-color: color-mix(
+      in srgb,
+      var(--destructive) 50%,
+      transparent
+    ) !important;
+  }
+
+  .toaster [data-sonner-toast][data-front="false"][data-type="warning"] {
+    background-color: color-mix(
+      in srgb,
+      var(--warning) 50%,
+      var(--background)
+    ) !important;
+    border-color: color-mix(
+      in srgb,
+      var(--warning) 50%,
+      transparent
+    ) !important;
+  }
+
+  .toaster [data-sonner-toast][data-front="false"][data-type="info"] {
+    background-color: color-mix(
+      in srgb,
+      var(--info) 50%,
+      var(--background)
+    ) !important;
+    border-color: color-mix(in srgb, var(--info) 50%, transparent) !important;
+  }
+
+  .toaster
+    [data-sonner-toast][data-front="false"]:not([data-type="success"]):not(
+      [data-type="error"]
+    ):not([data-type="warning"]):not([data-type="info"]) {
+    background-color: color-mix(
+      in srgb,
+      var(--popover) 70%,
+      transparent
+    ) !important;
+    border-color: color-mix(in srgb, var(--border) 50%, transparent) !important;
+  }
+}

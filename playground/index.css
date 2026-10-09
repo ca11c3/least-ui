@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@import "../src/styles/theme.css";
+
+/* Scan the component source directly so edits pick up new classes. */
+@source "../src";
+
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans antialiased;
+}
+
+/* Shiki renders both themes into CSS variables; pick one per colour mode. */
+.shiki,
+.shiki span {
+  background-color: transparent !important;
+}
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+}
+
+/* Page backdrop: two soft glows in the logo's violet and the theme's primary.
+   Fixed, so it stays put while long docs pages scroll over it. */
+.site-backdrop {
+  --backdrop-glow: 14%;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.dark .site-backdrop {
+  --backdrop-glow: 22%;
+}
+.site-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: -25% -10% auto;
+  height: 80vh;
+  background:
+    radial-gradient(40% 50% at 22% 35%, color-mix(in srgb, #7c3aed var(--backdrop-glow), transparent), transparent 70%),
+    radial-gradient(35% 45% at 78% 25%, color-mix(in srgb, var(--primary) var(--backdrop-glow), transparent), transparent 70%);
+  filter: blur(48px);
+}
